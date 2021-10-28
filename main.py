@@ -15,6 +15,11 @@ lmt = 1
 search_term_dia         = 'bom dia valtatui'
 search_term_noite       = 'boa noite valtatui'
 search_term_valtatui    = 'valtatui'
+search_term_gretchen    = 'gretchen'
+search_term_yours       = 'myme yours'
+search_term_hikaru      = 'ezaki hikaru'
+
+gif_list = []
 
 # get random results using default locale of EN_US
 def gets_gif_url(search_term):
@@ -46,6 +51,27 @@ class MyClient(discord.Client):
 
         if message.content.startswith('valtatui'):
             gif_url = gets_gif_url(search_term_valtatui)
+            await message.channel.send(gif_url)
+
+        if message.content.startswith('gretchen'):
+            gif_url = gets_gif_url(search_term_gretchen)
+            await message.channel.send(gif_url)
+        
+        if message.content.startswith('yours'):
+            gif_url = gets_gif_url(search_term_yours)
+            await message.channel.send(gif_url)
+
+        if message.content.startswith('hikaru'):
+            gif_url = gets_gif_url(search_term_hikaru)
+            await message.channel.send(gif_url)
+        
+        if message.content.startswith('?'):
+            search_aux = message.content.split(' ')
+            search_term = search_aux[0][1:]
+            search_aux.pop(0)
+            for term in search_aux:
+                search_term += ' ' + term
+            gif_url = gets_gif_url(search_term) #search_term)
             await message.channel.send(gif_url)
 
 client = MyClient()
